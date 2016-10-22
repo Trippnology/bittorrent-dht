@@ -1,5 +1,5 @@
 {
-  "name": "bittorrent-dht",
+  "name": "@trippnology/bittorrent-dht",
   "description": "Simple, robust, BitTorrent DHT implementation",
   "version": "7.4.0",
   "author": {
