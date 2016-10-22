@@ -13,6 +13,8 @@ var LRU = require('lru')
 
 var ROTATE_INTERVAL = 5 * 60 * 1000 // rotate secrets every 5 minutes
 
+// TNG: Increase max allowed listeners
+EventEmitter.prototype._maxListeners = 100;
 inherits(DHT, EventEmitter)
 
 function DHT (opts) {
