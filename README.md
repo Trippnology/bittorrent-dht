@@ -53,12 +53,13 @@ dht.listen(20000, function () {
   console.log('now listening')
 })
 
+dht.on('peer', function (peer, infoHash, from) {
+  console.log('found potential peer ' + peer.host + ':' + peer.port + ' through ' + from.address + ':' + from.port)
+})
+
 // find peers for the given torrent info hash
 dht.lookup(parsed.infoHash)
 
-dht.on('peer', function (peer, infoHash, from) {
-  console.log('found potential peer ' + peer.host + ':' + peer.port + ' through ' + from.host + ':' + from.port)
-})
 ```
 
 ### api
@@ -282,6 +283,9 @@ If you receive a key/value pair and you want to re-add to the dht it to keep it
 alive you can just `put` it again.
 
 ``` js
+var ed = require('ed25519-supercop')
+var dht = new DHT({ verify: ed.verify }) // you MUST specify the "verify" param if you want to get mutable content, otherwise null will be returned
+
 dht.get(key, function (err, res) {
   dht.put(res, function () {
     // re-added the key/value pair
